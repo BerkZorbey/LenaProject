@@ -72,6 +72,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem("userName", res.model.userName);
           localStorage.setItem("userId", res.model.id);
           setTimeout(() => { this.router.navigate(['/form-management'], { relativeTo: this.route }); }, 1500);
+          setTimeout(() => { location.reload();  }, 2000);
         }
         else {
           this.error();

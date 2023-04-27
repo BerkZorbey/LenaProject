@@ -23,7 +23,7 @@ export class FormDialogComponent implements OnInit {
 
   constructor(private dialog: MatDialog,@Inject(MAT_DIALOG_DATA) public data: FormId, private formService: FormService) { }
   ngOnInit() {
-    this.formId = 1;
+    this.formId = this.data.id;
   }
 
   addField() {

@@ -28,14 +28,5 @@ export class FormManagementComponent implements OnInit {
     });
   }
 
-  openFormOperationsDialog() {
-    this.dialog.open(FormDialogComponent, {
-      height: '400px',
-      width: '600px',
-      //data: {
-      //  id: event?.data.id
-      //}
-    });
-  }
 
 }

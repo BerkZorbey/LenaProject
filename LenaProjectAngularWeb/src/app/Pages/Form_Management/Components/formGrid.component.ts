@@ -71,7 +71,7 @@ export class FormGridComponent {
       height: '400px',
       width: '600px',
       data: {
-        id: 1
+        id: event?.data.id
       }
     });
   }

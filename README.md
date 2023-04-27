@@ -18,7 +18,7 @@ Lena Software Tarafından verilen Form Yönetim Projesidir. Proje Lena Software 
 - Yönetim sayfamızda oluşturduğumuz formlar bu formlar'ın id, adı, açıklaması ve ne zaman oluştuğu hakkında bilgiler vardır.
 <img src="https://user-images.githubusercontent.com/63355948/234959225-04785329-f116-41a1-b24c-8ee3fad8c337.png" width="900px" height="500px">
 
--Grid de Formun Adı, açıklaması ve ne zaman yaratıldğına dair sıralama ve arama işlemleri yapabiliyoruz.
+- Grid de Formun Adı, açıklaması ve ne zaman yaratıldğına dair sıralama ve arama işlemleri yapabiliyoruz.
 <img src="https://user-images.githubusercontent.com/63355948/234963544-4c74a600-7dbd-4077-b898-f4a3e8f9448f.png" width="1100px" height="500px">
 
 

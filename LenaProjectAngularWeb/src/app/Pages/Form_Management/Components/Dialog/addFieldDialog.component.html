@@ -1,0 +1,40 @@
+<link href="https://unpkg.com/@angular/material/prebuilt-themes/indigo-pink.css" rel="stylesheet">
+<div style="background-color:#E6F0ED">
+  <h1 mat-dialog-title>Add Field</h1>
+  <div mat-dialog-content>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="row">
+        
+        Name :
+        <input type="text" formControlName="name" class="form-control">
+      </div>
+      <div class="row">
+        DataType:
+        <select class="form-select" formControlName="dataType" aria-label="Default select example">
+          <option [value]=0 selected>String</option>
+          <option [value]=1>Number</option>
+          <option [value]=2>CheckBox</option>
+          <option [value]=3>TextArea</option>
+          <option [value]=4>Radio</option>
+        </select>
+      </div>
+      <div class="row">
+        Required:
+        <select class="form-select" formControlName="required" aria-label="Default select example">
+          <option value="true">true</option>
+          <option value="false" selected>false</option>
+        </select>
+      </div>
+      
+      <div class="form-group mt-2">
+        <button class="btn btn-primary">
+          Add Field
+        </button>
+        <p-toast [showTransformOptions]="'translateY(100%)'" [showTransitionOptions]="'1000ms'" [hideTransitionOptions]="'1000ms'" [showTransformOptions]="'translateX(100%)'"></p-toast>
+      </div>
+    </form>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close class="btn btn-secondary btn-sm">Close</button>
+  </div>
+</div>

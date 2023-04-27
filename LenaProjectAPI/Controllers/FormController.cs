@@ -3,10 +3,12 @@ using Application.Interfaces.Services;
 using Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
+using Newtonsoft.Json;
 
 namespace LenaProjectAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api")]
     [ApiController]
     public class FormController : BaseController
     {
@@ -15,96 +17,50 @@ namespace LenaProjectAPI.Controllers
         {
             _formService = formService;
         }
-        [HttpGet("{UserId}")]
+        [HttpGet("forms/{UserId}")]
         public async Task<IActionResult> GetUserFormsAsync(string UserId)
         {
             var forms = await _formService.GetUserFormsAsync(UserId);
-            if(forms.Success == true)
-            {
-                return Ok(forms);
-            }
-            else
-            {
-                return BadRequest(forms);
-            }
+           if(forms.Model != null)
+            return Ok(forms.Model);
+
+            return BadRequest();
         }
         [HttpGet("form/{FormId}")]
-        public async Task<IActionResult> GetFormById(int FormId)
+        public async Task<ResponseModel<Form>> GetFormById(int FormId)
         {
             var forms = await _formService.GetFormById(FormId);
-            if (forms.Success == true)
-            {
-                return Ok(forms);
-            }
-            else
-            {
-                return BadRequest(forms);
-            }
+            return forms;
         }
-        [HttpPost]
-        public async Task<IActionResult> CreateUserForm([FromBody]CreateFormDTO form)
+        [HttpPost("create")]
+        public async Task<ResponseModel<Form>> CreateUserForm([FromBody]CreateFormDTO form)
         {
             var forms = await _formService.CreateUserForm(form);
-            if (forms.Success == true)
-            {
-                return Ok(forms);
-            }
-            else
-            {
-                return BadRequest(forms);
-            }
+            return forms;
         }
-        [HttpPost("{FormId}")]
-        public async Task<IActionResult> AddFieldsToForm(int FormId,[FromBody] List<FieldDTO> Fields)
-        {
-            var forms = await _formService.AddFieldsToForm(FormId, Fields);
-            if (forms.Success == true)
+        [HttpPost("form/addField/{FormId}")]
+        public async Task<ResponseModel> AddFieldsToForm(int FormId,[FromBody] FieldDTO Field)
             {
-                return Ok(forms);
-            }
-            else
-            {
-                return BadRequest(forms);
-            }
+            var forms = await _formService.AddFieldsToForm(FormId, Field);
+            return forms;
         }
-        [HttpPut("{FormId}")]
-        public async Task<IActionResult> ChangeFormProperties(int FormId,[FromBody] FormDTO formDTO)
+        [HttpPut("form/{FormId}")]
+        public async Task<ResponseModel> ChangeFormProperties(int FormId,[FromBody] FormDTO formDTO)
         {
             var forms = await _formService.ChangeFormProperties(FormId, formDTO);
-            if (forms.Success == true)
-            {
-                return Ok(forms);
-            }
-            else
-            {
-                return BadRequest(forms);
-            }
+            return forms;
         }
-        [HttpDelete("{FormId}")]
-        public async Task<IActionResult> DeleteForm(int FormId)
+        [HttpDelete("Form/{FormId}")]
+        public async Task<ResponseModel> DeleteForm(int FormId)
         {
             var forms = await _formService.DeleteForm(FormId);
-            if (forms.Success == true)
-            {
-                return Ok(forms);
-            }
-            else
-            {
-                return BadRequest(forms);
-            }
+            return forms;
         }
-        [HttpDelete("Form/{FieldId}")]
-        public async Task<IActionResult> DeleteFieldFromForm(int FieldId)
+        [HttpDelete("{FormId}/{FieldId}")]
+        public async Task<ResponseModel> DeleteFieldFromForm(int FieldId,int FormId)
         {
-            var forms = await _formService.DeleteFieldFromForm(FieldId);
-            if (forms.Success == true)
-            {
-                return Ok(forms);
-            }
-            else
-            {
-                return BadRequest(forms);
-            }
+            var forms = await _formService.DeleteFieldFromForm(FieldId,FormId);
+            return forms;
         }
     }
 }

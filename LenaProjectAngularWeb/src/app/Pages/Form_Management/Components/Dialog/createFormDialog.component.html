@@ -1,0 +1,70 @@
+<link href="https://unpkg.com/@angular/material/prebuilt-themes/indigo-pink.css" rel="stylesheet">
+<div style="background-color:#E6F0ED">
+  <h1 mat-dialog-title>Create new Form</h1>
+  <div mat-dialog-content>
+    <h4>Form</h4>
+    <hr />
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="name">Form Name</label>
+        <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['name'].errors }" />
+        <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
+          <div *ngIf="f['name'].errors['required']">Form Name is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="description">Form Description</label>
+        <input type="text" formControlName="description" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['description'].errors }" />
+        <div *ngIf="submitted && f['description'].errors" class="invalid-feedback">
+          <div *ngIf="f['description'].errors['required']">Description is required</div>
+        </div>
+      </div>
+
+
+
+      <table class="table table-bordered mt-2" formArrayName="fields">
+        <tr>
+          <th colspan="3">Add Multiple Field:</th>
+          <th width="150px"><button type="button" (click)="addField()" class="btn bg-primary btn-sm text-white">Add More</button></th>
+        </tr>
+        <tr *ngFor="let field of fields().controls; let i=index" [formGroupName]="i">
+          <td>
+            Name :
+            <input type="text" formControlName="name" class="form-control">
+          </td>
+          <td width="150px">
+            DataType:
+            <select class="form-select" formControlName="dataType" aria-label="Default select example">
+              <option [value]= 0 selected>String</option>
+              <option [value]= 1 >Number</option>
+              <option [value]= 2 >CheckBox</option>
+              <option [value]= 3 >TextArea</option>
+              <option [value]= 4 >Radio</option>
+            </select>
+          </td>
+          <td width="100px">
+            Required:
+            <select class="form-select" formControlName="required"  aria-label="Default select example">
+              <option value= "true" >true</option>
+              <option value= "false" selected>false</option>
+            </select>
+          </td>
+          <td>
+            <br />
+            <button (click)="removeField(i)" class="btn bg-danger btn-sm ms-1 text-white justify-content-center">Remove</button>
+          </td>
+        </tr>
+      </table>
+
+      <div class="form-group mt-2">
+        <button class="btn btn-primary">
+          Create
+        </button>
+        <p-toast [showTransformOptions]="'translateY(100%)'" [showTransitionOptions]="'1000ms'" [hideTransitionOptions]="'1000ms'" [showTransformOptions]="'translateX(100%)'"></p-toast>
+      </div>
+    </form>
+</div>
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close class="btn btn-secondary btn-sm">Close</button>
+  </div>
+</div>

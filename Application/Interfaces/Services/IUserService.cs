@@ -11,7 +11,7 @@ namespace Application.Interfaces.Services
     public interface IUserService
     {
         public Task<ResponseModel<User>> GetUserAsync(string id);
-        public Task<ResponseModel<User>> Login(UserLoginDTO user);
+        public Task<ResponseModel<UserDTO>> Login(UserLoginDTO user);
         public Task<ResponseModel<User>> Register(UserRegisterDTO user);
     }
 }

@@ -1,0 +1,32 @@
+
+<div *ngIf="Token == null"  class="col-md-6 offset-md-3 mt-5">
+  <div class="card">
+    <h4 class="card-header">Login</h4>
+    <div class="card-body">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" />
+          <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+            <div *ngIf="f['email'].errors['required']">Email is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['password'].errors }" />
+          <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+            <div *ngIf="f['password'].errors['required']">Password is required</div>
+          </div>
+        </div>
+        <div class="form-group mt-3">
+          <button class="btn btn-primary">
+            Login
+          </button>
+          <a class="btn btn-link" [routerLink]="['/register']">Register</a>
+          <p-toast  [showTransformOptions]="'translateY(100%)'" [showTransitionOptions]="'1000ms'" [hideTransitionOptions]="'1000ms'" [showTransformOptions]="'translateX(100%)'"></p-toast>
+
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

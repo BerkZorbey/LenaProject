@@ -6,9 +6,11 @@ using AutoMapper;
 using Domain.Entities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Domain.Enums.BaseEnum;
 
 namespace Application.Services
 {
@@ -25,12 +27,12 @@ namespace Application.Services
             _mapper = mapper;
             _unitOfWork = unitOfWork;
         }
-        public async Task<ResponseModel> AddFieldsToForm(int FormId, List<FieldDTO> Fields)
+        public async Task<ResponseModel> AddFieldsToForm(int FormId, FieldDTO Fields)
         {
             try
             {
-                var mapper = _mapper.Map<List<Field>>(Fields);
-                foreach (var field in mapper) { field.FormId = FormId; }
+                var mapper = _mapper.Map<Field>(Fields);
+                mapper.FormId = FormId;
                 var result = await _fieldRepository.AddFields(mapper);
                 await _unitOfWork.CompleteAsync();
                 return result;
@@ -63,7 +65,9 @@ namespace Application.Services
         {
             try
             {
+                
                 var newForm = _mapper.Map<Form>(form);
+                
                 var result = await _formRepository.InsertAsync(newForm);
                 await _unitOfWork.CompleteAsync();
                 return result;
@@ -74,11 +78,11 @@ namespace Application.Services
             }
         }
 
-        public async Task<ResponseModel> DeleteFieldFromForm(int FieldId)
+        public async Task<ResponseModel> DeleteFieldFromForm(int FieldId,int FormId)
         {
             try
             {
-                var field = await _fieldRepository.GetById(FieldId);
+                var field = await _fieldRepository.GetById(FieldId,FormId);
                 if (field.Model is null) throw new Exception("Form Field not found!");
                 var result = await _fieldRepository.HardDeleteAsync(field.Model);
                 await _unitOfWork.CompleteAsync();

@@ -20,16 +20,16 @@ namespace Presistance.Repositories
             _field = _dbContext.Set<Field>();
         }
 
-        public async Task<ResponseModel> AddFields(List<Field> Fields)
+        public async Task<ResponseModel> AddFields(Field Fields)
         {
-            await _field.AddRangeAsync(Fields);
+            await _field.AddAsync(Fields);
 
             return new ResponseModel(201, "Successfully Fields Added.");
         }
 
-        public async Task<ResponseModel<Field>> GetById(int id)
+        public async Task<ResponseModel<Field>> GetById(int id,int FormId)
         {
-            var entity = await _field.Where(x => x.Id == id).FirstOrDefaultAsync();
+            var entity = await _field.Where(x => x.Id == id && x.FormId == FormId).FirstOrDefaultAsync();
             return new ResponseModel<Field>(entity);
         }
     }

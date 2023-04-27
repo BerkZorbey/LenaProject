@@ -1,0 +1,31 @@
+<link href="https://unpkg.com/@angular/material/prebuilt-themes/indigo-pink.css" rel="stylesheet">
+<div style="background-color:#E6F0ED">
+  <h1 mat-dialog-title>Operations</h1>
+  <div mat-dialog-content>
+    <h3>Form</h3>
+    <hr />
+    <div class="row">
+        <div class="col-6">
+          
+          <button (click)="addField()" class="btn btn-widtdh bg-primary btn-sm  text-white justify-content-center">Add Field To Form</button>
+        </div>
+        <div class="col-6">
+          
+          <button (click)="removeField()" class="btn btn-widtdh bg-danger btn-sm  text-white justify-content-center">Remove Field From Form</button>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-6">
+          <button (click)="changeFormProperty()" class="btn btn-widtdh bg-warning btn-sm  text-white justify-content-center">Change Form Properties</button>
+        </div>
+        <div class="col-6">
+          <button (click)="formPreview()" class="btn btn-widtdh bg-primary btn-sm  text-white justify-content-center">Preview Form</button>
+       </div>
+
+      </div>
+     
+    </div>
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close class="btn btn-secondary btn-sm">Close</button>
+  </div>
+</div>

@@ -40,7 +40,7 @@ namespace Application.Services
             
         }
 
-        public async Task<ResponseModel<User>> Login(UserLoginDTO LoginUser)
+        public async Task<ResponseModel<UserDTO>> Login(UserLoginDTO LoginUser)
         {
             try
             {
@@ -49,11 +49,12 @@ namespace Application.Services
                 if (getUser.Model is null) throw new Exception("User not found!");
                 if (!DecryptPassword(LoginUser.Password, getUser.Model.PasswordHash, getUser.Model.PasswordSalt)) throw new Exception("Password not correct!");
                 getUser.Model.Token = _tokenGeneratorService.GenerateToken();
-                return getUser;
+                var loginUser = _mapper.Map<UserDTO>(getUser.Model);
+                return new ResponseModel<UserDTO>(loginUser);
             }
             catch (Exception ex)
             {
-                return new ResponseModel<User>(401,ex.Message);
+                return new ResponseModel<UserDTO>(401,ex.Message);
             }
         }
 
@@ -64,7 +65,8 @@ namespace Application.Services
                 byte[] passwordHash, passwordSalt;
                 var newUser = _mapper.Map<User>(RegisterUser);
                 EncryptPassword(RegisterUser.Password, out passwordHash, out passwordSalt);
-                
+                var isThereSameEmail = await _userRepository.GetUserByEmail(newUser.Email);
+                if (isThereSameEmail.Model != null) throw new Exception("There is already registered user with this email");
                 newUser.PasswordSalt = passwordSalt;
                 newUser.PasswordHash = passwordHash;
 

@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.VisualStudio.JavaScript.Sdk/0.5.74-alpha">
+  <PropertyGroup>
+    <StartupCommand>npm start</StartupCommand>
+    <JavaScriptTestFramework>Jasmine</JavaScriptTestFramework>
+    <!-- Command to run on project build -->
+    <BuildCommand>
+    </BuildCommand>
+    <!-- Command to create an optimized build of the project that's ready for publishing -->
+    <ProductionBuildCommand>npm run build</ProductionBuildCommand>
+    <!-- Folder where production build objects will be placed -->
+    <BuildOutputFolder>$(MSBuildProjectDirectory)\dist\LenaProjectAngularWeb</BuildOutputFolder>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="src\app\Components\" />
+    <Folder Include="src\app\Services\" />
+    <Folder Include="src\app\Pages\Login\" />
+    <Folder Include="src\app\Pages\Register\" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptConfiguration Remove="src\app\NewFolder1\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="src\app\NewFolder1\**" />
+  </ItemGroup>
+</Project>

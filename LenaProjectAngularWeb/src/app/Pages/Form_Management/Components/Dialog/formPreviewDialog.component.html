@@ -1,0 +1,35 @@
+<link href="https://unpkg.com/@angular/material/prebuilt-themes/indigo-pink.css" rel="stylesheet">
+<div style="background-color:#E6F0ED">
+  <h1 mat-dialog-title>Form Preview</h1>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div mat-dialog-content>
+      Name : {{FormModel.Name}}
+      <br />
+      Description : {{FormModel.Description}}
+      <br />
+      <hr />
+      <div *ngFor="let field of FormModel.Fields">
+        Id : {{field.id}}
+        <br />
+        Name : {{field.name}}
+        <br />
+        <input [ngClass]="{ 'is-invalid': submitted && field.required }" formControlName="field" *ngIf="field.dataType == 0 || field.dataType == 3" type="text" class="form-control" />
+        <input [ngClass]="{ 'is-invalid': submitted && field.required }" formControlName="field" *ngIf="field.dataType == 1" type="number" class="form-control" />
+        <input [ngClass]="{ 'is-invalid': submitted && field.required }" formControlName="field" *ngIf="field.dataType == 2" type="checkbox" class="form-control" />
+        <input [ngClass]="{ 'is-invalid': submitted && field.required }" formControlName="field" *ngIf="field.dataType == 4" type="radio" class="form-control" />
+        <div *ngIf="submitted && f['field'].errors" class="invalid-feedback">
+          <div *ngIf="field.required"> {{field.name}} is required</div>
+        </div>
+        <br />
+      </div>
+      <div class="form-group mt-2">
+        <button class="btn btn-primary">
+          Send
+        </button>
+        </div>
+      </div>
+</form>
+    <div mat-dialog-actions>
+      <button mat-button mat-dialog-close class="btn btn-secondary btn-sm">Close</button>
+    </div>
+</div>

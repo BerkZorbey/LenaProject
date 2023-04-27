@@ -31,5 +31,10 @@ namespace Presistance.Repositories
             var entity = await _users.Where(x => x.Id == id).FirstOrDefaultAsync();
             return new ResponseModel<User>(entity);
         }
+        public async Task<ResponseModel<User>> GetUserByEmail(string email)
+        {
+            var entity = await _users.Where(x => x.Email == email).FirstOrDefaultAsync();
+            return new ResponseModel<User>(entity);
+        }
     }
 }

@@ -10,7 +10,7 @@ namespace Application.Interfaces.Repositories
 {
     public interface IFieldRepository : IBaseRepository<Field>
     {
-        public Task<ResponseModel<Field>> GetById(int id);
-        public Task<ResponseModel> AddFields(List<Field> Fields);
+        public Task<ResponseModel<Field>> GetById(int id,int FormId);
+        public Task<ResponseModel> AddFields(Field Fields);
     }
 }

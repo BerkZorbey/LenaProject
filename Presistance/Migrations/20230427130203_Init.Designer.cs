@@ -12,7 +12,7 @@ using Presistance.EFCoreDbContext;
 namespace Presistance.Migrations
 {
     [DbContext(typeof(LenaDbContext))]
-    [Migration("20230425210321_Init")]
+    [Migration("20230427130203_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

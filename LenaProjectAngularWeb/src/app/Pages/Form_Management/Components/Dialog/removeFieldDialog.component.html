@@ -1,0 +1,26 @@
+<link href="https://unpkg.com/@angular/material/prebuilt-themes/indigo-pink.css" rel="stylesheet">
+<div style="background-color:#E6F0ED">
+  <h1 mat-dialog-title>Create new Form</h1>
+  <div mat-dialog-content>
+    <h4>Form</h4>
+    <hr />
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="fieldId">FieldId</label>
+        <input type="text" formControlName="fieldId" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['fieldId'].errors }" />
+        <div *ngIf="submitted && f['fieldId'].errors" class="invalid-feedback">
+          <div *ngIf="f['fieldId'].errors['required']">Form Id is required</div>
+        </div>
+      </div>
+      <div class="form-group mt-2">
+        <button class="btn btn-primary">
+          Delete
+        </button>
+        <p-toast [showTransformOptions]="'translateY(100%)'" [showTransitionOptions]="'1000ms'" [hideTransitionOptions]="'1000ms'" [showTransformOptions]="'translateX(100%)'"></p-toast>
+      </div>
+    </form>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close class="btn btn-secondary btn-sm">Close</button>
+  </div>
+</div>

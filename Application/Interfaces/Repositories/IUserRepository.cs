@@ -12,5 +12,6 @@ namespace Application.Interfaces.Repositories
     {
         public Task<ResponseModel<User>> Login(User user);
         public Task<ResponseModel<User>> GetUserById(string id);
+        public Task<ResponseModel<User>> GetUserByEmail(string email);
     }
 }

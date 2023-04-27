@@ -14,14 +14,22 @@ namespace Presistance.Repositories
     {
         private readonly LenaDbContext _dbContext;
         private readonly DbSet<Form> _forms;
+        private readonly DbSet<Field> _fields;
         public FormRepository(LenaDbContext dbContext) : base(dbContext)
         {
             _dbContext = dbContext;
             _forms = _dbContext.Set<Form>();
+            _fields = _dbContext.Set<Field>();
         }
         public async Task<ResponseModel<Form>> GetById(int id)
         {
             var entity = await _forms.Where(x => x.Id == id).FirstOrDefaultAsync();
+            var fields = await _fields.Where(x=>x.FormId == id).ToListAsync();
+            if(entity.Fields is null)
+            {
+                entity.Fields = new List<Field>();
+                entity.Fields.AddRange(fields);
+            }
             return new ResponseModel<Form>(entity);
         }
 

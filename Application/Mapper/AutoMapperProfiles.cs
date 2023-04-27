@@ -17,6 +17,8 @@ namespace Application.Mapper
             CreateMap<UserLoginDTO, User>();
             CreateMap<User, UserRegisterDTO>();
             CreateMap<UserRegisterDTO, User>();
+            CreateMap<User, UserDTO>();
+            CreateMap<UserDTO, User>();
 
             CreateMap<FormDTO, Form>();
             CreateMap<Form, FormDTO>();

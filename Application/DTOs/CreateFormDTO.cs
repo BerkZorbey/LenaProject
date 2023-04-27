@@ -12,6 +12,6 @@ namespace Application.DTOs
         public string Name { get; set; }
         public string Description { get; set; }
         public string UserId { get; set; }
-        public List<Field> Fields { get; set; }
+        public List<FieldDTO> Fields { get; set; }
     }
 }

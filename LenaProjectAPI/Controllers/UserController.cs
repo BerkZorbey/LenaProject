@@ -1,13 +1,14 @@
 ﻿using Application.DTOs;
 using Application.Interfaces.Services;
 using Application.Services;
+using Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
 namespace LenaProjectAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -18,31 +19,17 @@ namespace LenaProjectAPI.Controllers
         }
         [HttpPost]
         [Route("register")]
-        public async Task<IActionResult> Register([FromBody] UserRegisterDTO user)
+        public async Task<ResponseModel<User>> Register([FromBody] UserRegisterDTO user)
         {
             var newUser = await _userService.Register(user);
-            if(newUser.Success == true)
-            {
-                return Ok(newUser);
-            }
-            else
-            {
-                return BadRequest(newUser);
-            }
+            return newUser;
         }
         [HttpPost]
         [Route("login")]
-        public async Task<IActionResult> Login([FromBody] UserLoginDTO loginUser)
+        public async Task<ResponseModel<UserDTO>> Login([FromBody] UserLoginDTO loginUser)
         {
             var user = await _userService.Login(loginUser);
-            if (user.Success == true)
-            {
-                return Ok(user);
-            }
-            else
-            {
-                return BadRequest(user);
-            }
+            return user;
         }
     }
 }

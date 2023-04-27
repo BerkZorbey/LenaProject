@@ -9,8 +9,8 @@ namespace Application.DTOs
 {
     public class FieldDTO
     {
-        public bool Required { get; set; }
+        public string Required { get; set; }
         public string Name { get; set; }
-        public DataTypes DataType { get; set; }
+        public string DataType { get; set; }
     }
 }
